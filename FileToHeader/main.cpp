@@ -23,20 +23,29 @@ int main(int const argc, char const ** argv)
 	if (argc <= 1)
 	{
 		cout << "Usage: [Filename]" << endl;
+		cout << "Usage: [InputName] [OutputName]" << endl;
 		return 1;
 	}
 
 	try {
 		auto const file = readFile(argv[1]);
-		
-		fs::path p = argv[1];
 
+		fs::path p = argv[1];
 		string filename = p.filename().string();
 		string path = p.parent_path().string();
-
 		std::replace(filename.begin(), filename.end(), '.', '_'); // replace point
 
-		ofstream out(path + "\\" + filename + ".h");
+		string outputFileName;
+		if (argc == 3)
+		{
+			outputFileName = argv[2];
+		}
+		else
+		{
+			outputFileName = path + "\\" + filename + ".h";
+		}
+
+		ofstream out(outputFileName);
 
 
 		if (!out.is_open()) {
