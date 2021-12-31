@@ -80,7 +80,7 @@ int main(int const argc, char const ** argv)
 			//out << "  ";
 			for (size_t j = 0; j < 16 && i+j < file.size(); ++j)
 			{
-				out  << std::hex << setw(4) << "0x" << static_cast<uint32_t>(std::bit_cast<uint8_t>(file[i+j])) << std::dec;
+				out << setw(4) << static_cast<int>(file[i+j]);
 				if (i+j < file.size() - 1)
 				{
 					out << ",";
@@ -92,7 +92,7 @@ int main(int const argc, char const ** argv)
 			for (size_t j = 0; j < 16 && i+j < file.size(); ++j)
 			{
 				char const sign = file[i+j];
-				if(sign >= ' ' && sign <= 'z') {
+				if(sign >= ' ' && sign <= 'z' && sign != '\\') {
 					out << " " << sign;
 				}
 				else {
