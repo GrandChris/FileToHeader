@@ -72,7 +72,7 @@ int main(int const argc, char const ** argv)
 		out << "#include <array>" << endl;
 		out << "#include <cstdint>" << endl;
 		out << endl;
-		out << "constexpr std::array<uint8_t, " << file.size() << "> " << filename << " = { " << endl;
+		out << "constexpr std::array<char, " << file.size() << "> " << filename << " = { " << endl;
 
 		size_t i = 0;
 		while(i < file.size())
@@ -80,7 +80,7 @@ int main(int const argc, char const ** argv)
 			//out << "  ";
 			for (size_t j = 0; j < 16 && i+j < file.size(); ++j)
 			{
-				out << setw(4) << static_cast<uint32_t>(std::bit_cast<uint8_t>(file[i+j])) ;
+				out  << std::hex << setw(4) << "0x" << static_cast<uint32_t>(std::bit_cast<uint8_t>(file[i+j])) << std::dec;
 				if (i+j < file.size() - 1)
 				{
 					out << ",";
